@@ -6,7 +6,7 @@ LABEL mantainer="Manuel de la Peña, https://github.com/mdelapenya"
 # ------------------------------------------------------------------------ base
 RUN apt-get -qq update     \
  && apt-get -qq upgrade -y \
- && apt-get -qq install -y locales curl unzip curl software-properties-common \
+ && apt-get -qq install -y locales curl unzip software-properties-common \
  && apt-get clean
 
 # ------------------------------------------------------------------------ java8
