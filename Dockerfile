@@ -8,6 +8,7 @@ RUN apt-get -qq update     \
  && apt-get -qq upgrade -y \
  && apt-get -qq install -y locales curl unzip software-properties-common \
  && apt-get clean
+ && rm -rf /var/lib/apt/lists/*
 
 # ------------------------------------------------------------------------ java8
 RUN (curl -L -k -b "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz | gunzip -c | tar x) \
