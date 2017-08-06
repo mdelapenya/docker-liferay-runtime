@@ -25,10 +25,10 @@ ENV PATH $PATH:$JAVA_HOME/bin
 ENV DEBIAN_FRONTEND=noninteractive 
 ENV LC_ALL en_US.UTF-8
 
-RUN set -x && \
-	echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
-	locale-gen en_US.UTF-8 && \
-  	dpkg-reconfigure locales
+RUN set -x \
+	&& echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+	&& locale-gen en_US.UTF-8 \
+  	&& dpkg-reconfigure locales
 
 # ----------------------------------------------------------------------- workdir
 # Define working directory.
