@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM openjdk:8-jdk
 
 LABEL mantainer="José Ángel Jiménez, https://github.com/jcampoy"
 LABEL mantainer="Manuel de la Peña, https://github.com/mdelapenya" 
@@ -7,18 +7,9 @@ LABEL mantainer="Manuel de la Peña, https://github.com/mdelapenya"
 RUN set -x \
  && apt-get -qq update     \
  && apt-get -qq upgrade -y \
- && apt-get -qq install -y locales curl unzip software-properties-common \
+ && apt-get -qq install -y locales software-properties-common \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
-
-# ------------------------------------------------------------------------ java8
-RUN set -x \
-  && (curl -L -k -b "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz | gunzip -c | tar x) \
-  &&  mv /$(find / -type d -maxdepth 1 -name "jdk1*" | awk -F / '{print $NF}') /opt/jdk 
-
-ENV JAVA_HOME /opt/jdk
-ENV JRE_HOME  $JAVA_HOME/jre
-ENV PATH $PATH:$JAVA_HOME/bin
 
 # ------------------------------------------------------------------------ utf-8
 ## Set LOCALE to UTF8
@@ -29,10 +20,6 @@ RUN set -x \
 	&& echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
 	&& locale-gen en_US.UTF-8 \
   	&& dpkg-reconfigure locales
-
-# ----------------------------------------------------------------------- workdir
-# Define working directory.
-WORKDIR /opt
 
 # Define default command.
 CMD ["bash"]
